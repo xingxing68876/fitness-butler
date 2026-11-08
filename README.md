@@ -31,7 +31,7 @@
 
 | 你在哪 | 去哪下 |
 |---|---|
-| 国内 | **百度网盘**（链接见小红书笔记 / 联系作者）—— 含 APK + 《零基础上手说明》PDF |
+| 国内 | **百度网盘** [https://pan.baidu.com/s/1s4eeVN1N1THddKgSEob6mw?pwd=e0db](https://pan.baidu.com/s/1s4eeVN1N1THddKgSEob6mw?pwd=e0db)（提取码 `e0db`）—— 含 APK + 《零基础上手说明》PDF |
 | 国外 | 本仓库 **[Releases](https://github.com/xingxing68876/fitness-butler/releases)** 页下载 `fitness-butler-v0.1.0.apk` |
 
 详细图文上手教程（含如何申请 DeepSeek API Key）只放在百度网盘，本仓库不重复维护。
