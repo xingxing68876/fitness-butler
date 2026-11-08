@@ -83,7 +83,7 @@ class RecognizeService : Service() {
         var resultJson: String? = null
         var error: String? = null
         try {
-            // 2026-11-05 默认引擎切 DeepSeek(家 WiFi→火山间歇断,DeepSeek 走腾讯 EdgeOne 稳;
+            // 2026-11-05 默认引擎切 DeepSeek(实测部分网络到火山引擎间歇断,DeepSeek 走腾讯 EdgeOne 稳;
             // 实测同图 9.7s vs 豆包 45s 效果同档)。key 复用聊天 ds_api_key,零配置。
             val engine = db.getSetting("vision_engine", VisionRecognizers.ENGINE_DEEPSEEK)
             var key = db.getSetting("vision_api_key_$engine", "")

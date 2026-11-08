@@ -59,8 +59,10 @@
         </intent>
     </queries>
 
+    <!-- allowBackup=false(开源版):数据库 settings 表存有明文 API Key,
+         若允许系统自动备份会被同步到用户的云备份里,与"数据只在本机"的声明冲突 -->
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"

@@ -22,7 +22,7 @@ object VisionRecognizers {
     const val ENGINE_GLM = "glm"
     const val ENGINE_DEEPSEEK = "deepseek"
 
-    /** 真实模型 ID(本机工具实测在用:vidqa.py / seeimg.py) */
+    /** 默认模型 ID(实测可用) */
     const val DEFAULT_MODEL_DOUBAO = "doubao-seed-2-1-pro-260915"
     const val DEFAULT_MODEL_GLM = "glm-4.5v"
     /** DeepSeek 最新模型(2026-11-05 官方 /models 实查:旧 v4-flash-vision-exp 已迭代并入,视觉直接支持) */
@@ -111,7 +111,7 @@ class GlmRecognizer(
     }
 }
 
-/** DeepSeek 官方视觉(2026-11-05 起:家 WiFi 到火山间歇断,DeepSeek 走腾讯 EdgeOne 稳,设为首选引擎) */
+/** DeepSeek 官方视觉(2026-11-05 起:实测部分网络到火山引擎间歇断,DeepSeek 走腾讯 EdgeOne 更快,设为首选引擎) */
 class DeepseekRecognizer(
     private val apiKey: String,
     private val modelId: String

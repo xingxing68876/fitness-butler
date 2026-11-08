@@ -8,7 +8,7 @@
 - **戴上手表** → 睡眠、心率、血氧、压力自动同步
 - **AI 点评** → 嘴毒 / 鸡汤 / 跪求 / 自定义四种风格，看得见地损你
 
-> 不是商业产品，是个人项目公开分享。**没有云端、没有账号、没有服务器**，所有数据只存在你自己的手机里。
+> 不是商业产品，是个人项目公开分享。**没有云端、没有账号、没有服务器**，记录数据只存在你自己的手机本地数据库里（系统自动备份已关闭 `allowBackup=false`，不会被同步到云备份）。
 
 ---
 
@@ -19,7 +19,7 @@
 | 依赖 | 具体要求 | 缺了会怎样 |
 |---|---|---|
 | 手机 | Android 8.0+（API 26+） | 装不上 |
-| 体脂秤 | **蚂蚁阿福智能体脂秤 A1**（支付宝「蚂蚁阿福」活动 9.9 元领的那款，蓝牙名 `AFU-WL` 开头） | 连秤、自动记录体重用不了 |
+| 体脂秤 | **蚂蚁阿福智能体脂秤 A1**（支付宝「蚂蚁阿福」活动中领取的型号，蓝牙名 `AFU-WL` 开头；价格以官方活动为准） | 连秤、自动记录体重用不了 |
 | 手表 | **iQOO WATCH GT** | 睡眠/心率/血氧/压力同步用不了 |
 | 手机品牌 | **vivo / iQOO**（读手表数据必需） | 其他品牌手机：手动记账、拍照识别、体脂秤、锻炼计划正常，**手表数据同步不可用** |
 
@@ -36,6 +36,10 @@
 
 详细图文上手教程（含如何申请 DeepSeek API Key）只放在百度网盘，本仓库不重复维护。
 
+> ⚠️ **关于安装包**：目前发布的是 **debug 版 APK**（个人项目，未申请正式发布签名）。
+> debug 版可被 `adb` 调试，**不要装到共用/二手机器上**；如需长期使用建议自行 clone 后构建 release 版。
+> 由于使用通用 debug 签名，理论上第三方可伪造同签名升级包——只从本仓库 Releases 或作者提供的网盘链接下载。
+
 ---
 
 ## 功能
@@ -49,18 +53,18 @@
 
 ### 日历 · 趋势
 - 月度汇总，按天看热量缺口
-- 9 项指标折线图，X 轴短日期、按住拖动连续选日
+- 9 项指标折线图（其中「训练负荷」视 vivo 机型可能长期为空），X 轴短日期、按住拖动连续选日
 - 当日详情：三餐明细、逐次称重记录、心率/血氧/压力分时段曲线
 
 ### 锻炼 · 打卡
 - 内置训练计划模板，AI 可定制
-- 21 个动作的 3D 演示动画（正/侧视角、倍速、镜像）+ 中文语音讲要领
+- 22 个动作的 3D 演示动画（正/侧视角、倍速、镜像）+ 中文语音讲要领
 - 打卡完成后生成分享图
 
 ### 设置
 - 称呼、性别、身高、年龄（算基础代谢用）
 - 四种 AI 风格：嘴毒 / 鸡汤 / 跪求 / 自定义
-- AI 大脑接线（OpenAI 兼容端点）+ 视觉识别引擎（DeepSeek / 豆包 / 智谱）
+- AI 大脑接线（OpenAI 兼容端点）+ 视觉识别引擎（DeepSeek / 豆包，界面可切）
 - 每日提醒：记账午间 / 记账晚间 / 锻炼打卡，三个时间可调可单独关
 - 头像：本人 + AI 四风格，可换相册图
 
@@ -103,9 +107,24 @@ cd fitness-butler
 ./gradlew assembleDebug
 ```
 
+> 若提示 `Permission denied: ./gradlew`，先 `chmod +x gradlew`（Windows 用 `gradlew.bat`）。
+
 产物：`app/build/outputs/apk/debug/app-debug.apk`
 
-**零第三方依赖**：没有 AndroidX、没有 WorkManager、没有 OkHttp、没有 Room。全是系统 API——`SQLiteOpenHelper`、`android.app.Fragment`、`HttpURLConnection`、`AlarmManager`、`Notification.Builder`。APK 约 17 MB，其中 14 MB 是动作演示动画帧。
+**除 Kotlin 标准库外零第三方依赖**：没有 AndroidX、没有 WorkManager、没有 OkHttp、没有 Room。全是系统 API——`SQLiteOpenHelper`、`android.app.Fragment`、`HttpURLConnection`、`AlarmManager`、`Notification.Builder`。APK 约 17 MB，其中 14 MB 是动作演示动画帧。
+
+### Gradle 下载超时（国内常见）
+
+`./gradlew` 首次运行要从 `services.gradle.org` 下 Gradle 本体，国内常超时。两个办法：
+
+1. **用本机已装的 Gradle 8.13+** 直接构建，绕过 wrapper：
+   ```bash
+   gradle assembleDebug
+   ```
+2. **改用国内镜像**：把 `gradle/wrapper/gradle-wrapper.properties` 里的 `distributionUrl` 换成
+   `https\://mirrors.cloud.tencent.com/gradle/gradle-8.13-bin.zip`
+
+> AGP 8.13.2 要求 Gradle **8.13 或更高**，wrapper 版本正好踩在最低要求线上，请勿降级。
 
 ### vivo / iQOO 装机补充
 
@@ -134,7 +153,7 @@ adb shell pm grant dev.xd.fitnessbutler com.vivo.health.widget.permission
 - 最大摄氧量（VO₂max）、训练负荷拿不到（vivo 未开放）
 - **体脂秤只实测过蚂蚁阿福 A1**，其他型号不保证
 - AI 识别的热量是估算值，不是精确营养计算
-- 21 个动作演示里缺少卧推、划船、引体等（免费合规的 3D 素材找不到），这些动作显示文字要领
+- 22 个动作演示里缺少划船、引体、绳索类等（免费合规的 3D 素材找不到），这些动作显示文字要领
 - 每日提醒用非精确闹钟（未申请 `SCHEDULE_EXACT_ALARM`），误差几分钟
 - 无数据导出/导入功能
 

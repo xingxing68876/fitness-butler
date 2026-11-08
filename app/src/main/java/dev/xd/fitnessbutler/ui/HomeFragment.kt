@@ -157,7 +157,7 @@ class HomeFragment : Fragment() {
         }
         scrollToBottom()
 
-        // 对话管理:压缩当前对话 / 开新对话(2026-10-18 用户,参考 Claude Code 的 compact/clear)
+        // 对话管理:压缩当前对话 / 开新对话(2026-10-18,参考同类对话产品的 compact/clear 交互)
         v.findViewById<TextView>(R.id.home_chatmenu_btn).setOnClickListener { showChatMenu(db) }
 
         // 📷 快捷按钮:直接进自建相册(单选),选完图回对话流识别(2026-10-17 对话式识别)
@@ -884,7 +884,7 @@ class HomeFragment : Fragment() {
         ).apply { gravity = Gravity.START })
     }
 
-    // ---------- 对话压缩 / 新对话(2026-10-18 用户,参考 Claude Code 的 compact + clear) ----------
+    // ---------- 对话压缩 / 新对话(2026-10-18,参考同类对话产品的 compact + clear 交互) ----------
 
     /** 当前会话 id(settings.chat_session;v7 起会话隔离,旧对话归档在各自 session 里) */
     private fun chatSession(db: DbHelper): String {

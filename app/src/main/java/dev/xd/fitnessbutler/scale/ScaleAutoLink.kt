@@ -146,7 +146,7 @@ object ScaleAutoLink {
         // 前台保活:放下手机/熄屏时 vivo 会冻结进程丢蓝牙帧,服务进程不冻结(2026-11-05)
         ScaleSyncService.start(app)
 
-        // 已知 MAC 直连(桌面点击场景最常见:就是家里那一台)
+        // 已知 MAC 直连(桌面点击场景最常见:已配对过的那一台)
         val knownAddr = db.getSetting("scale_last_addr", "")
         if (knownAddr.isNotBlank()) {
             val dev = try { ad.getRemoteDevice(knownAddr) } catch (_: Exception) { null }
