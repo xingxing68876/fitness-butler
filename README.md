@@ -31,7 +31,7 @@
 
 | 你在哪 | 去哪下 |
 |---|---|
-| 国内 | **百度网盘** [https://pan.baidu.com/s/1UFRd_IFaoJA0sBl9kuI9tg?pwd=bwsl](https://pan.baidu.com/s/1UFRd_IFaoJA0sBl9kuI9tg?pwd=bwsl)（提取码 `bwsl`）—— 一个总文件夹，含本 APP 与其它资料，随时更新 |
+| 国内 | **百度网盘** [https://pan.baidu.com/s/1xEHrx8p027a-Eg7DG6YbJg?pwd=ww9r](https://pan.baidu.com/s/1xEHrx8p027a-Eg7DG6YbJg?pwd=ww9r)（提取码 `ww9r`）—— 一个总文件夹，含本 APP 与其它资料，随时更新 |
 | 国外 | 本仓库 **[Releases](https://github.com/xingxing68876/fitness-butler/releases)** 页下载 `fitness-butler-v0.1.0.apk` |
 
 详细图文上手教程（含如何申请 DeepSeek API Key）只放在百度网盘，本仓库不重复维护。
