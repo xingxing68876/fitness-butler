@@ -31,8 +31,8 @@
 
 | 你在哪 | 去哪下 |
 |---|---|
-| 国内 | **百度网盘**（链接见小红书笔记 / 联系作者）—— 含 `app-debug.apk` + 《零基础上手说明》PDF |
-| 国外 | 本仓库 **Releases** 页下载 `app-debug.apk` |
+| 国内 | **百度网盘**（链接见小红书笔记 / 联系作者）—— 含 APK + 《零基础上手说明》PDF |
+| 国外 | 本仓库 **[Releases](https://github.com/xingxing68876/fitness-butler/releases)** 页下载 `fitness-butler-v0.1.0.apk` |
 
 详细图文上手教程（含如何申请 DeepSeek API Key）只放在百度网盘，本仓库不重复维护。
 
