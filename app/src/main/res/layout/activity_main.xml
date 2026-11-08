@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 主框架:Fragment 容器 + 底部导航五入口(拍照为中央大按钮) -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/green"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:id="@+id/nav_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/green"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingTop="6dp"
+        android:paddingBottom="10dp">
+
+        <LinearLayout
+            android:id="@+id/nav_home"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/nav_home_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🗨️"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/nav_home_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="对话"
+                android:textColor="@color/ink"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/nav_calendar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/nav_calendar_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📅"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/nav_calendar_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="日历"
+                android:textColor="@color/ink"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/nav_photo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/nav_photo_icon"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_circle_ink"
+                android:gravity="center"
+                android:text="📷"
+                android:textColor="@color/paper"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/nav_photo_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="拍照"
+                android:textColor="@color/ink"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/nav_workout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/nav_workout_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🏋️"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/nav_workout_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="锻炼"
+                android:textColor="@color/ink"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/nav_guide"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/nav_guide_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🔥"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/nav_guide_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="打卡"
+                android:textColor="@color/ink"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

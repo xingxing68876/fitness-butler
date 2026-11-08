@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 小组件 B 配置:一键拍照食物(1×1 单格,2026-10-25 设计决策:单功能组件一律一格;
+     minWidth 40dp=标准 1 格保守值,原 110dp 在 vivo 桌面被按 2×2 摆) -->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="40dp"
+    android:minHeight="40dp"
+    android:targetCellWidth="1"
+    android:targetCellHeight="1"
+    android:updatePeriodMillis="0"
+    android:initialLayout="@layout/widget_photo"
+    android:resizeMode="none"
+    android:widgetCategory="home_screen" />

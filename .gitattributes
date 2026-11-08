@@ -1,0 +1,16 @@
+* text=auto
+
+# gradlew 必须是 LF，否则 Linux/macOS 上 clone 后报 "bad interpreter"
+gradlew      text eol=lf
+*.sh         text eol=lf
+
+# Windows 批处理必须 CRLF
+*.bat        text eol=crlf
+
+# 二进制
+*.jar        binary
+*.png        binary
+*.jpg        binary
+*.jpeg       binary
+*.mp3        binary
+*.apk        binary

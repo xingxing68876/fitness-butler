@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 小组件 C 配置:一键连秤同步(1×1 单格,2026-10-25;点一下连秤,入账后组件上显最新体重) -->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="40dp"
+    android:minHeight="40dp"
+    android:targetCellWidth="1"
+    android:targetCellHeight="1"
+    android:updatePeriodMillis="0"
+    android:initialLayout="@layout/widget_scale"
+    android:resizeMode="none"
+    android:widgetCategory="home_screen" />

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 网络:LLM 对话 + 视觉识别全走 HttpURLConnection 直连,2026-10-17 补(缺它真机两链路全灭) -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- 识别前台服务(2026-10-19 设计决策:APP 缩后台识别不中断);dataSync 型需显式声明 -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+    <!-- 13+ 通知权限:没授也只是看不到常驻通知,服务照跑 -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- 自建相册选图页(2026-10-17):系统 PhotoPicker 在 vivo 上卡死弹不出,改读 MediaStore;
+         Android 13+ 照片权限(部分授权 VISUAL_USER_SELECTED 兜底),<=32 旧存储权限 -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+
+    <!-- 旧安卓(<=10)蓝牙权限 -->
+    <uses-permission
+        android:name="android.permission.BLUETOOTH"
+        android:maxSdkVersion="30" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_ADMIN"
+        android:maxSdkVersion="30" />
+    <uses-permission
+        android:name="android.permission.ACCESS_FINE_LOCATION"
+        android:maxSdkVersion="30" />
+
+    <!-- 安卓12+蓝牙权限 -->
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_SCAN"
+        android:usesPermissionFlags="neverForLocation" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+
+    <!-- vivo 健康私有 provider(睡眠/心率/血氧/压力):signature|privileged,
+         机主 pm grant 放行,重装 APK 后需重跑 grant -->
+    <uses-permission android:name="com.vivo.health.widget.permission" />
+    <!-- vivo 步数 provider:普通权限,安装即得 -->
+    <uses-permission android:name="com.vivo.assistant.StepProvider" />
+
+    <!-- 快照采样器:开机重注册周期闹钟 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
+
+    <!-- 安卓11+ 包可见性:声明要调起的相机/相册 Intent -->
+    <queries>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.GET_CONTENT" />
+            <data android:mimeType="image/*" />
+        </intent>
+    </queries>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 纯框架自实现的拍照暂存文件提供器(替代 androidx FileProvider) -->
+        <provider
+            android:name=".file.PhotoFileProvider"
+            android:authorities="dev.xd.fitnessbutler.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true" />
+
+        <!-- 餐食照片识别前台服务:后台继续识别(2026-10-19),跑完自停 -->
+        <service
+            android:name=".rec.RecognizeService"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" />
+
+        <!-- 连秤前台保活:熄屏防 vivo 冻结丢蓝牙帧(2026-11-05),收工即停 -->
+        <service
+            android:name=".scale.ScaleSyncService"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" />
+
+        <!-- 血氧/压力/心率快照采样器:30 分钟周期闹钟 + 开机重注册 -->
+        <receiver
+            android:name=".health.VitalsSampler$AlarmReceiver"
+            android:exported="false" />
+        <receiver
+            android:name=".health.VitalsSampler$BootReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <!-- 每日提醒(2026-11-07):记账 13:30/21:00 + 锻炼 19:00,没记录才发,开机重注册 -->
+        <receiver
+            android:name=".remind.Reminders$Receiver"
+            android:exported="false" />
+        <receiver
+            android:name=".remind.Reminders$BootReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <!-- 桌面小组件 A:当日运动清单(自管每小时闹钟刷新 + 打卡后 Workout 侧调 updateAll) -->
+        <receiver
+            android:name=".widget.PlansWidget"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="dev.xd.fitnessbutler.WIDGET_TICK" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_plans_info" />
+        </receiver>
+
+        <!-- 桌面小组件 B:一键拍照食物(点击走 ACTION_QUICK_PHOTO 直达拍照流) -->
+        <receiver
+            android:name=".widget.PhotoWidget"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_photo_info" />
+        </receiver>
+
+        <!-- 桌面小组件 C:一键连秤同步(2026-10-25,点击拉浮层连秤,入账后广播刷体重) -->
+        <receiver
+            android:name=".widget.ScaleWidget"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="dev.xd.fitnessbutler.WIDGET_SCALE_REFRESH" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_scale_info" />
+        </receiver>
+
+        <!-- 连秤同步浮层:透明卡片,不进最近任务 -->
+        <activity
+            android:name=".scale.ScaleSyncActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:theme="@style/AppTheme.Transparent" />
+
+        <!-- 全屏看大图(对话流照片点开放大,2026-10-26) -->
+        <activity
+            android:name=".ui.PhotoViewerActivity"
+            android:exported="false" />
+    </application>
+</manifest>

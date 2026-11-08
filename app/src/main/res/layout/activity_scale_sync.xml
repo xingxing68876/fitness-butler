@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 连秤同步浮层:全屏半透明遮罩 + 居中墨色卡片(透明 Activity 载入,连上/超时自动 finish) -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#59000000"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_pill_ink"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="28dp"
+        android:paddingRight="28dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="18dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⚖️"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/sync_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:text="正在连接体重秤…"
+            android:textColor="#EFF4E1"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/sync_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:gravity="center"
+            android:text="请站上秤站稳\n读数锁定后自动入账"
+            android:textColor="#BFEFD8"
+            android:textSize="12sp" />
+    </LinearLayout>
+</FrameLayout>

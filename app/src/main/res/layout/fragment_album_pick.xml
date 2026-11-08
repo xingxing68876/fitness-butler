@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 自建相册选图页(2026-10-17):系统 PhotoPicker 在 vivo 上卡死弹不出,改为 APP 自己读 MediaStore 网格展示 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/paper"
+    android:orientation="vertical">
+
+    <!-- 顶栏:返回 / 标题(张数) / 最新一张快捷 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="14dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:id="@+id/album_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="4dp"
+            android:paddingEnd="10dp"
+            android:text="←"
+            android:textColor="@color/ink"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/album_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="相册选图"
+            android:textColor="@color/ink"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/album_latest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_tag_ink"
+            android:paddingStart="14dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="14dp"
+            android:paddingBottom="8dp"
+            android:text="⚡ 最新一张"
+            android:textColor="@color/paper"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- 权限空态:未授权时显示,网格隐藏 -->
+    <LinearLayout
+        android:id="@+id/album_perm_box"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="30dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="读取相册需要「照片和视频」权限\n只用于本机选图识别,不上传相册清单"
+            android:textColor="@color/gray_text"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/album_grant_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_pill_ink"
+            android:gravity="center"
+            android:paddingTop="13dp"
+            android:paddingBottom="13dp"
+            android:text="授予权限"
+            android:textColor="@color/paper"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/album_settings_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:padding="8dp"
+            android:text="被拒过了?去系统设置里开 →"
+            android:textColor="@color/gray_text"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <!-- 照片网格:MediaStore DATE_ADDED 倒序,3 列 -->
+    <GridView
+        android:id="@+id/album_grid"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:cacheColorHint="#00000000"
+        android:horizontalSpacing="3dp"
+        android:numColumns="3"
+        android:paddingStart="3dp"
+        android:paddingEnd="3dp"
+        android:scrollbars="none"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="3dp" />
+
+    <!-- 底部操作:单选=「识别这张」(点图即识别时此钮做状态提示);多选=「识别 N 张」 -->
+    <TextView
+        android:id="@+id/album_pick_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/bg_pill_ink"
+        android:gravity="center"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        android:text="识别选中 ✓"
+        android:textColor="@color/paper"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+</LinearLayout>

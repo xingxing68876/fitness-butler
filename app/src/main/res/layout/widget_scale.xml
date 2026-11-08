@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 桌面小组件 C:一键连秤同步(1×1 单格,点击走 ScaleSyncActivity) -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_scale_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_pill_ink"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingLeft="2dp"
+    android:paddingRight="2dp"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp">
+
+    <TextView
+        android:id="@+id/widget_scale_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="⚖️"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/widget_scale_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="--"
+        android:textColor="#EFF4E1"
+        android:textSize="13sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/widget_scale_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="称重"
+        android:textColor="#BFEFD8"
+        android:textSize="9sp" />
+</LinearLayout>

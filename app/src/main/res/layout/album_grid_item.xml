@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 相册网格单格:缩略图铺满 + 右上角选中角标(多选时显示序号) -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp">
+
+    <ImageView
+        android:id="@+id/album_item_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#E8E8E3"
+        android:contentDescription="相册照片"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/album_item_check"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="end|top"
+        android:layout_margin="6dp"
+        android:background="@drawable/bg_check_dot"
+        android:gravity="center"
+        android:text="✓"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+</FrameLayout>

@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 一日详情:汇总三格 + 分时段图 + 运动卡 + 三餐&称重 + 身体六宫格 -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mint"
+    android:fadeScrollbars="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="14dp">
+
+        <!-- 头 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/day_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="10月16日 · 周五"
+                android:textColor="@color/ink"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/day_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="✕"
+                android:textColor="@color/gray_text"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- 汇总三格 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_cell_stat"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingTop="9dp"
+                android:paddingBottom="9dp">
+
+                <TextView
+                    android:id="@+id/sum_gap"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="@color/ink"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="热量缺口"
+                    android:textColor="@color/gray_text"
+                    android:textSize="9sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_cell_stat"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingTop="9dp"
+                android:paddingBottom="9dp">
+
+                <TextView
+                    android:id="@+id/sum_weight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="--"
+                    android:textColor="@color/ink"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="体重 kg"
+                    android:textColor="@color/gray_text"
+                    android:textSize="9sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_cell_stat"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingTop="9dp"
+                android:paddingBottom="9dp">
+
+                <TextView
+                    android:id="@+id/sum_sleep"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="--"
+                    android:textColor="@color/ink"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="睡眠"
+                    android:textColor="@color/gray_text"
+                    android:textSize="9sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- 分时段图 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="一日分时段(手表=小时均值)"
+            android:textColor="@color/ink"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/bg_card_green"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/day_sleep_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="睡眠 -- · 血氧 -- · 压力 -- · 训练负荷 --"
+                android:textColor="@color/gray_text"
+                android:textSize="9sp" />
+
+            <dev.xd.fitnessbutler.ui.DayTimelineView
+                android:id="@+id/day_timeline"
+                android:layout_width="match_parent"
+                android:layout_height="92dp"
+                android:layout_marginTop="2dp" />
+
+            <!-- 2026-10-26 当日全数据折线:左侧参数栏(照日历侧栏,点行显隐)+右侧折线 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/day_chart_side"
+                    android:layout_width="112dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+                <dev.xd.fitnessbutler.ui.TrendChartView
+                    android:id="@+id/day_hour_chart"
+                    android:layout_width="0dp"
+                    android:layout_height="195dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/day_hour_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text=""
+                android:textColor="@color/gray_text"
+                android:textSize="8sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="0时"
+                    android:textColor="@color/gray_text"
+                    android:textSize="8sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="6时"
+                    android:textColor="@color/gray_text"
+                    android:textSize="8sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="12时"
+                    android:textColor="@color/gray_text"
+                    android:textSize="8sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="18时"
+                    android:textColor="@color/gray_text"
+                    android:textSize="8sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="24时"
+                    android:textColor="@color/gray_text"
+                    android:textSize="8sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="━ 血氧"
+                    android:textColor="#4A90D9"
+                    android:textSize="8.5sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="━ 压力"
+                    android:textColor="#C94F7C"
+                    android:textSize="8.5sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="■ 运动"
+                    android:textColor="#E07B39"
+                    android:textSize="8.5sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="● 称重"
+                    android:textColor="@color/gray_text"
+                    android:textSize="8.5sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="▮ 三餐"
+                    android:textColor="#5A8F2E"
+                    android:textSize="8.5sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- 运动 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="运动(手表自动收割)"
+            android:textColor="@color/ink"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/day_exercises"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <!-- 三餐 & 称重(秤一天可多次,逐次列出) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="三餐 &amp; 称重"
+            android:textColor="@color/ink"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/day_meals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/bg_card_white"
+            android:orientation="vertical"
+            android:paddingLeft="11dp"
+            android:paddingRight="11dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp" />
+
+        <!-- 每次称重逐行(2026-10-26 设计决策:一天多次全记录) -->
+        <LinearLayout
+            android:id="@+id/day_weighings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical" />
+
+        <!-- 身体指标六宫格 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="身体指标"
+            android:textColor="@color/ink"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/day_body_grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical" />
+    </LinearLayout>
+</ScrollView>

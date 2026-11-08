@@ -1,0 +1,18 @@
+# Gradle
+.gradle/
+build/
+app/build/
+
+# 本机 Android SDK 路径
+local.properties
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# 系统
+.DS_Store
+Thumbs.db
+*.log
+captures/

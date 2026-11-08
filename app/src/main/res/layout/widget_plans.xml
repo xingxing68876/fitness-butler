@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 桌面小组件 A:当日运动清单(RemoteViews 限制:仅基础 View,禁 ScrollView/自绘) -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_plans_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#EFF4E1"
+    android:orientation="vertical"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+    <TextView
+        android:id="@+id/widget_plans_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="今日运动"
+        android:textColor="#141414"
+        android:textSize="13sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/widget_row0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:textColor="#141414"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/widget_row1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:textColor="#141414"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/widget_row2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:textColor="#141414"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/widget_row3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:textColor="#141414"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/widget_row4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:textColor="#141414"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/widget_row5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:textColor="#141414"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/widget_plans_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="4dp"
+        android:text="0/0 已打卡"
+        android:textColor="#8FB24E"
+        android:textSize="10sp"
+        android:textStyle="bold" />
+</LinearLayout>

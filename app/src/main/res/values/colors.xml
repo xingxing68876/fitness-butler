@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 色板照 demo/ui-demo.html:橄榄绿 / 墨黑 / 薄荷 / 浅绿卡 -->
+    <color name="green">#AEC96B</color>
+    <color name="green_deep">#8FB24E</color>
+    <color name="mint">#EFF4E1</color>
+    <color name="card">#DCEBB2</color>
+    <color name="ink">#141414</color>
+    <color name="paper">#FFFFFF</color>
+    <color name="gray_text">#666666</color>
+</resources>

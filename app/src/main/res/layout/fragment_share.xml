@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 打卡分享图页(2026-11-06 设计决策):Keep 风海报生成,替代原「图鉴」tab -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F2EA">
+
+    <ScrollView
+        android:id="@+id/share_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="14dp">
+
+            <!-- 海报预览(3:4) -->
+            <ImageView
+                android:id="@+id/iv_preview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:background="#141414"
+                android:contentDescription="海报预览" />
+
+            <!-- 背景切换行 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/btn_bg_prev"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_tag_out"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="8dp"
+                    android:text="◀"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_bg_index"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="背景 1/6"
+                    android:textColor="#141414"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/btn_bg_next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_tag_out"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="8dp"
+                    android:text="▶"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/btn_bg_custom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_tag_out"
+                    android:paddingLeft="14dp"
+                    android:paddingTop="8dp"
+                    android:paddingRight="14dp"
+                    android:paddingBottom="8dp"
+                    android:text="选图"
+                    android:textColor="#141414"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- 海报文字颜色(全图主色,浅色背景选黑字) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="文字颜色:"
+                    android:textColor="#141414"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/t_white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_tag_out"
+                    android:paddingLeft="12dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="5dp"
+                    android:text="白"
+                    android:textColor="#141414"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/t_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_tag_out"
+                    android:paddingLeft="12dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="5dp"
+                    android:text="黑"
+                    android:textColor="#141414"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/t_yellow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_tag_out"
+                    android:paddingLeft="12dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="5dp"
+                    android:text="黄"
+                    android:textColor="#141414"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/t_green"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_tag_out"
+                    android:paddingLeft="12dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="5dp"
+                    android:text="绿"
+                    android:textColor="#141414"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/t_orange"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_tag_out"
+                    android:paddingLeft="12dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="5dp"
+                    android:text="橙"
+                    android:textColor="#141414"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- 昵称开关 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="显示昵称"
+                    android:textColor="#141414"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <Switch
+                    android:id="@+id/sw_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <!-- 文字模式:鸡汤 / 自定义 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/btn_mode_quote"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_tag_ink"
+                    android:gravity="center"
+                    android:paddingTop="9dp"
+                    android:paddingBottom="9dp"
+                    android:text="鸡汤文案"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/btn_mode_custom"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_tag_out"
+                    android:gravity="center"
+                    android:paddingTop="9dp"
+                    android:paddingBottom="9dp"
+                    android:text="自定义文字"
+                    android:textColor="#141414"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- 自定义文字区(仅自定义模式可见) -->
+            <LinearLayout
+                android:id="@+id/box_custom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/et_custom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_edit"
+                    android:hint="写一句放上海报,如:今天也瘦了 0.4"
+                    android:inputType="text"
+                    android:maxLines="2"
+                    android:padding="12dp"
+                    android:textColor="#141414"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="文字颜色:"
+                        android:textColor="#141414"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/c_white"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:layout_marginStart="6dp"
+                        android:background="@drawable/bg_tag_out"
+                        android:gravity="center"
+                        android:text="白"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/c_yellow"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/bg_tag_out"
+                        android:gravity="center"
+                        android:text="黄"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/c_green"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/bg_tag_out"
+                        android:gravity="center"
+                        android:text="绿"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/c_orange"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/bg_tag_out"
+                        android:gravity="center"
+                        android:text="橙"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/c_black"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/bg_tag_out"
+                        android:gravity="center"
+                        android:text="黑"
+                        android:textSize="10sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 文案行 -->
+            <TextView
+                android:id="@+id/tv_quote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_edit"
+                android:gravity="center"
+                android:padding="12dp"
+                android:textColor="#141414"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_quote_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:text="点一下换一条"
+                android:textColor="#999999"
+                android:textSize="11sp" />
+
+            <!-- 生成按钮 -->
+            <TextView
+                android:id="@+id/btn_generate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/bg_tag_ink"
+                android:gravity="center"
+                android:padding="14dp"
+                android:text="生成海报并分享"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- 裁切态(全屏覆盖):固定 3:4 视窗,拖动/缩放选区 -->
+    <FrameLayout
+        android:id="@+id/crop_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#EE141414"
+        android:visibility="gone">
+
+        <dev.xd.fitnessbutler.ui.PosterCropView
+            android:id="@+id/crop_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="30dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/btn_crop_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_tag_out"
+                android:paddingLeft="26dp"
+                android:paddingTop="10dp"
+                android:paddingRight="26dp"
+                android:paddingBottom="10dp"
+                android:text="取消"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/btn_crop_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:background="@drawable/bg_tag_ink"
+                android:paddingLeft="26dp"
+                android:paddingTop="10dp"
+                android:paddingRight="26dp"
+                android:paddingBottom="10dp"
+                android:text="✓ 用这张"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:gravity="center"
+            android:text="拖动和双指缩放,让亮框框住想留的部分"
+            android:textColor="#AAAAAA"
+            android:textSize="13sp" />
+    </FrameLayout>
+</FrameLayout>
